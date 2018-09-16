@@ -496,6 +496,15 @@
           _this3.next();
         }, time ? time : this.options.nextStringDelay.total);
       }
+    }, {
+      key: "interaction",
+      value: function interaction(element) {
+        var context = this;
+        element.addEventListener('click', function handleNext() {
+          element.removeEventListener('click', handleNext);
+          context.next();
+        });
+      }
 
       /*
         Convert each string in the array to a sub-array. While happening, search the subarrays for HTML tags.
@@ -877,6 +886,12 @@
       key: "break",
       value: function _break() {
         this.queueUp("break");
+        return this;
+      }
+    }, {
+      key: "interaction",
+      value: function interaction(element) {
+        this.queueUp("interaction", element);
         return this;
       }
     }, {

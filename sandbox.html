@@ -59,6 +59,12 @@
       <h3 id="example6"><!-- This comment should be removed automatically. Don't worry about it being typed. -->This string is hard-coded!</h3>
     </section>
 
+    <section>
+      <h2>Interaction String</h2>
+      <h3 id="example7"></h3>
+      <button id="continue7">Continue</button>
+    </section>
+
     <script src="dist/typeit.js"></script>
 
 		<script>
@@ -109,6 +115,18 @@
       new TypeIt('#example6', {
         autoStart: false
       });
+
+      new TypeIt('#example7', {
+        speed: 50
+      })
+        .type('I\'ll be written first. Click the button to continue.')
+        .interaction(document.querySelector('#continue7'))
+        .empty()
+        .type('Got it! Continuing! Click to continue again.')
+        .interaction(document.querySelector('#continue7'))
+        .break()
+        .type('I\'ll be written last.');
+
 		</script>
 	</body>
 </html>

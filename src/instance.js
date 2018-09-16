@@ -352,6 +352,14 @@ export default class Instance {
     }, time ? time : this.options.nextStringDelay.total);
   }
 
+  interaction(element) {
+    const context = this;
+    element.addEventListener("click", function handleNext() {
+      element.removeEventListener("click", handleNext);
+      context.next();
+    });
+  }
+
   /*
     Convert each string in the array to a sub-array. While happening, search the subarrays for HTML tags.
     When a complete tag is found, slice the subarray to get the complete tag, insert it at the correct index,
