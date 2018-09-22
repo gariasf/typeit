@@ -500,10 +500,26 @@
       key: "interaction",
       value: function interaction(element) {
         var context = this;
-        element.addEventListener('click', function handleNext() {
-          element.removeEventListener('click', handleNext);
+        element.style.pointerEvents = 'initial';
+
+        function handleNext() {
+          element.removeEventListener("click", handleNext);
+          document.removeEventListener('keypress', handleKeypress);
+          element.style.pointerEvents = 'none';
           context.next();
-        });
+        }
+
+        function handleKeypress(event) {
+          if (event.key == 'Enter') {
+            document.removeEventListener('keypress', handleKeypress);
+            element.removeEventListener("click", handleNext);
+            context.next();
+          }
+        }
+
+        element.addEventListener("click", handleNext);
+
+        document.addEventListener('keypress', handleKeypress);
       }
 
       /*
