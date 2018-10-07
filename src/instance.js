@@ -352,7 +352,7 @@ export default class Instance {
     }, time ? time : this.options.nextStringDelay.total);
   }
 
-  interaction(element) {
+  interaction(element, action) {
     const context = this;
     element.style.pointerEvents = "initial";
 
@@ -361,6 +361,7 @@ export default class Instance {
       document.removeEventListener("keypress", handleKeypress);
       element.style.pointerEvents = "none";
       context.next();
+      action();
     }
 
     function handleKeypress(event) {
@@ -368,6 +369,7 @@ export default class Instance {
         document.removeEventListener("keypress", handleKeypress);
         element.removeEventListener("click", handleNext);
         context.next();
+        action();
       }
     }
 

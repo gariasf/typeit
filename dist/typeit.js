@@ -498,28 +498,30 @@
       }
     }, {
       key: "interaction",
-      value: function interaction(element) {
+      value: function interaction(element, action) {
         var context = this;
-        element.style.pointerEvents = 'initial';
+        element.style.pointerEvents = "initial";
 
         function handleNext() {
           element.removeEventListener("click", handleNext);
-          document.removeEventListener('keypress', handleKeypress);
-          element.style.pointerEvents = 'none';
+          document.removeEventListener("keypress", handleKeypress);
+          element.style.pointerEvents = "none";
           context.next();
+          action();
         }
 
         function handleKeypress(event) {
-          if (event.key == 'Enter') {
-            document.removeEventListener('keypress', handleKeypress);
+          if (event.key == "Enter") {
+            document.removeEventListener("keypress", handleKeypress);
             element.removeEventListener("click", handleNext);
             context.next();
+            action();
           }
         }
 
         element.addEventListener("click", handleNext);
 
-        document.addEventListener('keypress', handleKeypress);
+        document.addEventListener("keypress", handleKeypress);
       }
 
       /*
@@ -906,8 +908,8 @@
       }
     }, {
       key: "interaction",
-      value: function interaction(element) {
-        this.queueUp("interaction", element);
+      value: function interaction(element, action) {
+        this.queueUp("interaction", element, action);
         return this;
       }
     }, {

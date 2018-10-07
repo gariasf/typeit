@@ -125,7 +125,10 @@
         .type('Got it! Continuing! Click or press enter to continue again.')
         .interaction(document.querySelector('#continue7'))
         .break()
-        .type('I\'ll be written last.');
+        .type('I\'ll be written last.')
+        .interaction(document.querySelector('#continue7'), console.log('I\'ll be written on the console'))
+        .break()
+        .type('I\'ll have written to the console.')
 
 		</script>
 	</body>

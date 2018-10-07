@@ -79,8 +79,8 @@ export default class TypeIt extends Core {
     return this;
   }
 
-  interaction(element) {
-    this.queueUp("interaction", element);
+  interaction(element, action) {
+    this.queueUp("interaction", element, action);
     return this;
   }
 
