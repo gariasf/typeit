@@ -2,7 +2,7 @@
  *
  *   typeit - The most versatile animated typing utility on the planet.
  *   Author: Alex MacArthur <alex@macarthur.me> (https://macarthur.me)
- *   Version: v5.10.7
+ *   Version: v5.10.10
  *   URL: https://typeitjs.com
  *   License: GPL-2.0
  *
@@ -520,15 +520,26 @@ var Instance = function () {
 
       document.addEventListener("keypress", handleKeypress);
     }
+  }, {
+    key: "exec",
+    value: function exec(func) {
+      var context = this;
+      return new Promise(function (resolve, reject) {
+        func();
+        context.next();
+
+        resolve();
+      });
+    }
+  }, {
+    key: "rake",
+
 
     /*
       Convert each string in the array to a sub-array. While happening, search the subarrays for HTML tags.
       When a complete tag is found, slice the subarray to get the complete tag, insert it at the correct index,
       and delete the range of indexes where the indexed tag used to be.
     */
-
-  }, {
-    key: "rake",
     value: function rake(array) {
       var _this4 = this;
 
@@ -907,6 +918,12 @@ var TypeIt = function (_Core) {
     key: "interaction",
     value: function interaction(element, action) {
       this.queueUp("interaction", [element, action]);
+      return this;
+    }
+  }, {
+    key: "exec",
+    value: function exec(func) {
+      this.queueUp("exec", [func]);
       return this;
     }
   }, {

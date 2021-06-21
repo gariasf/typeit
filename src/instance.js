@@ -1,6 +1,9 @@
 import "./defaults.js";
 import {
-  appendStyleBlock, groupHTMLTags, isVisible, randomInRange,
+  appendStyleBlock,
+  groupHTMLTags,
+  isVisible,
+  randomInRange,
   removeComments,
   startsWith,
   toArray
@@ -188,7 +191,7 @@ export default class Instance {
     //-- If an opening HTML tag is found and we're not already printing inside a tag
     if (
       this.options.html &&
-      (startsWith(string[0], "<") && !startsWith(string[0], "</"))
+      startsWith(string[0], "<") && !startsWith(string[0], "</")
     ) {
       //-- Create node of that string name, by regexing for the closing tag.
       let matches = string[0].match(/\<(.*?)\>/);
@@ -292,9 +295,7 @@ export default class Instance {
 
     this.elementWrapper.insertAdjacentHTML(
       "beforeend",
-      `<span style="${this.inlineStyles.base}${
-        this.inlineStyles.cursor
-      }${visibilityStyle}" class="ti-cursor">${this.options.cursorChar}</span>`
+      `<span style="${this.inlineStyles.base}${this.inlineStyles.cursor}${visibilityStyle}" class="ti-cursor">${this.options.cursorChar}</span>`
     );
   }
 
@@ -344,15 +345,18 @@ export default class Instance {
   }
 
   pause(time = false) {
-    setTimeout(() => {
-      this.next();
-    }, time ? time : this.options.nextStringDelay.total);
+    setTimeout(
+      () => {
+        this.next();
+      },
+      time ? time : this.options.nextStringDelay.total
+    );
   }
 
   interaction(args) {
     const context = this;
-    const element = args[0]
-    const action = args[1]
+    const element = args[0];
+    const action = args[1];
 
     element.style.pointerEvents = "initial";
 
@@ -361,7 +365,7 @@ export default class Instance {
       document.removeEventListener("keypress", handleKeypress);
       element.style.pointerEvents = "none";
       context.next();
-      if(action) action();
+      if (action) action();
     }
 
     function handleKeypress(event) {
@@ -369,7 +373,7 @@ export default class Instance {
         document.removeEventListener("keypress", handleKeypress);
         element.removeEventListener("click", handleNext);
         context.next();
-        if(action) action();
+        if (action) action();
       }
     }
 
@@ -381,12 +385,12 @@ export default class Instance {
   exec(func) {
     const context = this;
     return new Promise((resolve, reject) => {
-      func()
-        context.next();
+      func();
+      context.next();
 
-      resolve()
-    })
-  };
+      resolve();
+    });
+  }
 
   /*
     Convert each string in the array to a sub-array. While happening, search the subarrays for HTML tags.
@@ -548,8 +552,8 @@ export default class Instance {
   }
 
   /*
-  * Empty the existing text, clearing it instantly.
-  */
+   * Empty the existing text, clearing it instantly.
+   */
   empty() {
     this.contents("");
     this.next();
