@@ -1,12 +1,9 @@
 import "./defaults.js";
 import {
-  isVisible,
-  groupHTMLTags,
-  randomInRange,
+  appendStyleBlock, groupHTMLTags, isVisible, randomInRange,
   removeComments,
   startsWith,
-  toArray,
-  appendStyleBlock
+  toArray
 } from "./utilities";
 
 export default class Instance {
@@ -380,6 +377,16 @@ export default class Instance {
 
     document.addEventListener("keypress", handleKeypress);
   }
+
+  exec(func) {
+    const context = this;
+    return new Promise((resolve, reject) => {
+      func()
+        context.next();
+
+      resolve()
+    })
+  };
 
   /*
     Convert each string in the array to a sub-array. While happening, search the subarrays for HTML tags.
