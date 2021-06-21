@@ -84,6 +84,11 @@ export default class TypeIt extends Core {
     return this;
   }
 
+  exec(func) {
+    this.queueUp("exec", [func]);
+    return this;
+  };
+
   options(options) {
     this.queueUp("setOptions", options);
     return this;
