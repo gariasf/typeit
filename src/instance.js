@@ -191,7 +191,8 @@ export default class Instance {
     //-- If an opening HTML tag is found and we're not already printing inside a tag
     if (
       this.options.html &&
-      startsWith(string[0], "<") && !startsWith(string[0], "</")
+      startsWith(string[0], "<") &&
+      !startsWith(string[0], "</")
     ) {
       //-- Create node of that string name, by regexing for the closing tag.
       let matches = string[0].match(/\<(.*?)\>/);
@@ -388,7 +389,7 @@ export default class Instance {
       func();
       context.next();
 
-      resolve();
+      resolve(context);
     });
   }
 
